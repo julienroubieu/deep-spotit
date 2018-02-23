@@ -1,7 +1,0 @@
-tensorflow:
-    image: tensorflow/tensorflow:1.5.0
-    ports:
-        - "8888:8888"
-    volumes:
-        - .:/app
-    working_dir: /app

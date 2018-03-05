@@ -1,48 +1,36 @@
 import csv
 import numpy as np
 
-def load_labels(cards_file_path):
+def load_cards(cards_file_path):
   """
-    Reads the labels of all cards from a CSV file.
-    Each line in the file should start with the card name, followed by 57 binary [0/1] values to denote presence of each symbol in the card.
+    Reads the content of all cards from a CSV file.
+    There are 55 cards in the game.
+    The file should contain one line per card, containing 57 int [0/1] values to denote presence of each symbol in the card.
 
     :param cards_file_path: csv file path
-    :returns: dictionnary mapping each card name to a numpy array of ints
+    :returns: numpy 2D array of '0'|'1' strings, representing the content of each card. Shape: (55, 57).
   """
-  labels_dict = {}
-  with open(cards_file_path) as cardsfile:
-    csvreader = csv.reader(cardsfile, delimiter=',')
-    for row in csvreader:
-      card_id, *labels = row
-      labels_dict[card_id] = np.array(labels, np.int32)
-  return labels_dict
+  return np.genfromtxt(cards_file_path, delimiter=',', dtype=np.str)
 
 
 def load_symbols(symbols_file_path):
   """
     Reads the name of the symbols from a CSV file.
-    Each line should contain the symbol name in the second column.
-    The symbols will be read and returned in the same order, ignoring the first column.
+    Each line should contain the symbol name.
+    The line index should be the same as the column index in the cards file.
 
     :param symbols_file_path: csv file path
-    :returns: array of 57 symbol names (indexed by their id-1)
+    :returns: numpy array of 57 symbol names. Shape: (57,)
   """
-  symbols = []
-  with open(symbols_file_path) as symbolsfile:
-    csvreader = csv.reader(symbolsfile, delimiter=',')
-    for row in csvreader:
-      symbols.append(row[1])
-  return symbols
+  return np.genfromtxt(symbols_file_path, delimiter=',', dtype=np.str)
 
 
-def labels_to_symbols(labels, symbols_names):
+def card_content_to_symbol_names(card_content, symbol_names):
   """
-    Converts a labels hot array into a list of the symbol names it contains.
+    Converts a card's content hot array into a list of the symbol names it contains.
 
-    :param labels: [0/1] array
-    :param symbols_names: array of symbol names
+    :param card_content: [0/1] numpy array
+    :param symbols_names: numpy array of symbol names using same indexes as card_content
     :returns: list of strings
   """
-  def non_empty(str): return str != ''
-  names = [symbols_names[idx] if hot == 1 else '' for idx,hot in enumerate(labels)]
-  return list(filter(non_empty, names))
+  return symbol_names[card_content == '1']

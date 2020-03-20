@@ -1,5 +1,5 @@
 import tensorflow as tf
-from src.models.model1 import CNN_1
+from models.model1 import CNN_1
 from helpers.loader import load_cards, load_symbols, card_content_to_symbol_names
 
 cards = load_symbols('data/cards.csv')

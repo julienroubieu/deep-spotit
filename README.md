@@ -10,6 +10,16 @@ mkvirtualenv -r requirements.txt spotit_env
 ```
 
 ```
-# User virtualenv
+# Use virtualenv
 workon spotit_env
+```
+
+```
+# Run commands from Makefile
+make clean train
+```
+
+```
+# Leave virtualenv
+deactivate
 ```

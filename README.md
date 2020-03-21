@@ -16,7 +16,7 @@ workon spotit_env
 
 ```
 # Run commands from Makefile
-make clean train
+make clean prepare train
 ```
 
 ```

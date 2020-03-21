@@ -11,8 +11,12 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 #################################################################################
 
 ## Train model
+prepare:
+	python $(PROJECT_DIR)/src/01_prepare.py
+
+## Train model
 train:
-	python $(PROJECT_DIR)/src/train.py
+	python $(PROJECT_DIR)/src/02_train.py
 
 ## Delete all compiled Python files
 clean:

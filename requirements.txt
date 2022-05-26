@@ -1,5 +1,5 @@
 pathlib==1.0.1
 scandir==1.10.0
 h5py==2.10.0
-tensorflow==2.5.3
+tensorflow==2.7.2
 scikit-image==0.16.2
